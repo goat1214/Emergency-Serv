@@ -1,6 +1,7 @@
 $(function(){
 	$(document).ready(function(){
 		//open the lateral panel
+		$('[data-toggle="tooltip"]').tooltip();
 	  $(".panel-button").click(function(){
 			$('.panel').addClass('is-visible');
 	    $(".close-space").addClass("visible-close-space");
@@ -14,6 +15,13 @@ $(function(){
 	    $(".panel").removeClass("is-visible");
 	    $(".close-space").removeClass('visible-close-space');
 	  });
+	  $(".flow-button").click(function(){
+	  	$('#flowModal').modal('show');
+	  	  $("#flowModal").draggable({
+	  	    handle: ".modal-header"
+	  	  });
+	  })
+
 	});
 
 	$('.close').click(function(){
@@ -351,3 +359,58 @@ function desiredDestination(index){
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   }
+
+
+  // plot bar chart
+  var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var color = Chart.helpers.color;
+  var barChartData = {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [{
+          label: 'Dataset 1',
+          backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+          borderColor: window.chartColors.red,
+          borderWidth: 1,
+          data: [
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor()
+          ]
+      }, {
+          label: 'Dataset 2',
+          backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+          borderColor: window.chartColors.blue,
+          borderWidth: 1,
+          data: [
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor(),
+              randomScalingFactor()
+          ]
+      }]
+  };
+  window.onload = function() {
+      var ctx = document.getElementById("canvas").getContext("2d");
+
+      window.myBar = new Chart(ctx, {
+          type: 'bar',
+          data: barChartData,
+          options: {
+              responsive: true,
+              legend: {
+                  position: 'top',
+              },
+              title: {
+                  display: true,
+                  text: 'Chart.js Bar Chart'
+              }
+          }
+      });
+  };

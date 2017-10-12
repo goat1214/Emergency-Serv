@@ -10,6 +10,8 @@
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js" ></script>
+    <script src="js/utils.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/public.css">
 
@@ -106,12 +108,58 @@
                 </div>
             </div><!-- Modal -->
         </form>
+        <form class="modal fade" id="flowModal">
+            <div class="vertical-alignment-helper">
+              <div class="modal-dialog modal-lg vertical-align-center">
+              
+                  <div class="modal-content">
+                  
+                      <div class="modal-header">
+                          <button type="button" class="close" hospital_list-dismiss="modal"><span>&times;</span></button>
+                          <h4 class="modal-title"><i class="fa fa-bar-chart" aria-hidden="true"></i></span> 高速公路車況</h4>
+                      </div>
+                      <div class="modal-body" id="flowModal-body">
+                        <div id="filter">
+                          <div class="btn-group">
+                             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown">
+                               <span data-bind="label">起點</span>&nbsp;<span class="caret"></span>
+                             </button>
+                             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown1">
+                               <span data-bind="label">終點</span>&nbsp;<span class="caret"></span>
+                             </button>
+                             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown2">
+                               <span data-bind="label">高速公路</span>&nbsp;<span class="caret"></span>
+                             </button>
+                             <ul class="dropdown-menu" role="menu">
+                               <li><a href="#">Item 1</a></li>
+                               <li><a href="#">Another item</a></li>
+                               <li>
+                                 <a href="#">Sub item</a>
+                                 
+                               </li>
+                             </ul>
+                           </div>
+                         </div>
+                        </div>
+                        
+                        <div id="bar-chart">
+                          <canvas id="canvas"></canvas>
+                        </div>
+                        <div><h4><i class="fa fa-car" aria-hidden="true"></i>交通事件:</h4></div>
+                        
+                      </div>
+                  </div>
+                </div>
+            </div><!-- Modal -->
+        </form>
       </div><!-- container -->
       <section>
         <div class="rad-body-wrapper">
           <div class="container-fluid">
             <div id="map" class="rad-chart" ></div>
-            <a href="#0" class="panel-button button"><span class="glyphicon glyphicon-arrow-left"></span></a>
+            <div class="drop_left">
+              <a href="#0" class="panel-button button" data-toggle="tooltip" title="Hooray!"><span class="glyphicon glyphicon-arrow-left"></span></a>
+              <a href="#0" class="flow-button button" data-toggle="tooltip" title="Hooray!"><span class="glyphicon glyphicon-arrow-left"></span></a></div>
 
 
             <!-- panel -->
@@ -144,9 +192,9 @@
      <script src = "js/public.js "></script>
     <script type="text/javascript" async defer 
      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByAK_p8gdIDklIJHgykl9ZSRMsRugpqsQ&callback=init&libraries=places"></script>
-    
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
 
     <script src='bootstrap/js/bootstrap.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
