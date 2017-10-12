@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>EMERGENCY-SERV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+    <link rel="Shortcut Icon" type="image/x-icon" href="img/webmarker.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js" ></script>
+    <script src="js/utils.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/public.css">
+
+
+  </head>
+  <body>
+    <section>
+      <header>
+        <nav class="rad-navigation">
+          <div class="rad-logo-container">
+            <a href="#" class="rad-toggle-btn pull-right"><i class="fa fa-bars"></i></a>
+            <a href="#" class="rad-logo">Emergency-Serv</a>
+
+          </div>
+          <div class="rad-top-nav-container">
+            <div class="navbar-form navbar-left col-xs-4">
+                <input type="text" placeholder="輸入您的位置" id='site-search' > 
+            </div>
+            <!-- <ul class="links">
+              <li>
+                <a class="rad-menu-item" href="#"><i class="fa fa-comment-o"></i></a>
+              </li>
+              <li class="rad-dropdown"><a class="rad-menu-item" href="#"><i class="fa fa-envelope-o"><span class="rad-menu-badge">3</span></i></a>
+                <ul class="rad-dropmenu-item">
+                  <li class="rad-dropmenu-header"><a href="#">Your Notifications</a></li>
+                  <li class="rad-notification-item">
+                    <a class="rad-notification-content" href="#">
+
+                    </a>
+                  </li>
+                  <li class="rad-dropmenu-footer"><a href="#">See all notifications</a></li>
+                </ul>
+              </li>
+              <li class="rad-dropdown"><a class="rad-menu-item" href="#"><i class="fa fa-bell-o"><span class="rad-menu-badge">49</span></i></a>
+                <ul class="rad-dropmenu-item">
+                  <li class="rad-dropmenu-header"><a href="#">Your Alerts</a></li>
+                  <li class="rad-notification-item"><a class="rad-notification-content" href="#"></a>
+                  </li>
+                  <li class="rad-dropmenu-footer"><a href="#">See all alerts</a></li>
+                </ul>
+              </li>
+            </ul> -->
+          </div>
+        </nav>
+      </header>
+    </section>
+    <aside>
+      <nav class="rad-sidebar">
+        <ul>
+          <li><a href="introduction.html" class="inbox"><i class="fa fa-dashboard"><span class="icon-bg rad-bg-success"></span></i><span class="rad-sidebar-item">簡介</span></a></li>
+          <li><a href="index.html"><i class="fa fa-bar-chart-o"><span class="icon-bg rad-bg-danger"></span></i><span class="rad-sidebar-item">Hospi Service</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main>
+      <div class="container">
+        <form class="modal fade" id="myModal">
+            <div class="vertical-alignment-helper">
+              <div class="modal-dialog modal-lg vertical-align-center">
+              
+                  <div class="modal-content">
+                  
+                      <div class="modal-header">
+                          <button type="button" class="close" hospital_list-dismiss="modal"><span>&times;</span></button>
+                          <h4 class="modal-title"><span class="glyphicon glyphicon-plus"></span> 選擇醫院</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div id = "main">
+                          <div class="avatar">
+                            <img src="img/ambulance.png">
+                          </div>
+                          <div class="filter-button-container">
+                            <div class="toggle">
+                                <input type="checkbox" id="childButton" onclick="DATAClick()">
+                                <span class="button" ><i class="fa fa-child" aria-hidden="true"></i></span>
+                                <label>兒童病床</label>
+                            </div>
+                            <div class="toggle">
+                                <input type="checkbox" id="burnButton" onclick="DATAClick()">
+                                <span class="button" ><i class="fa fa-fire-extinguisher" aria-hidden="true"></i></span>
+                                <label>燒燙傷中心</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="infos">
+                          <i></i>
+                          <div id = "load">
+                          <span></span><span></span>
+                          <!-- <button id = "load">載入更多</button> -->
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div><!-- Modal -->
+        </form>
+        <form class="modal fade" id="flowModal">
+            <div class="vertical-alignment-helper">
+              <div class="modal-dialog modal-lg vertical-align-center">
+              
+                  <div class="modal-content">
+                  
+                      <div class="modal-header">
+                          <button type="button" class="close" hospital_list-dismiss="modal"><span>&times;</span></button>
+                          <h4 class="modal-title"><i class="fa fa-bar-chart" aria-hidden="true"></i></span> 高速公路車況</h4>
+                      </div>
+                      <div class="modal-body" id="flowModal-body">
+                        <div id="filter">
+                          <div class="btn-group">
+                             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown">
+                               <span data-bind="label">起點</span>&nbsp;<span class="caret"></span>
+                             </button>
+                             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown1">
+                               <span data-bind="label">終點</span>&nbsp;<span class="caret"></span>
+                             </button>
+                             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown2">
+                               <span data-bind="label">高速公路</span>&nbsp;<span class="caret"></span>
+                             </button>
+                             <ul class="dropdown-menu" role="menu">
+                               <li><a href="#">Item 1</a></li>
+                               <li><a href="#">Another item</a></li>
+                               <li>
+                                 <a href="#">Sub item</a>
+                                 
+                               </li>
+                             </ul>
+                           </div>
+                         </div>
+                        </div>
+                        
+                        <div id="bar-chart">
+                          <canvas id="canvas"></canvas>
+                        </div>
+                        <div><h4><i class="fa fa-car" aria-hidden="true"></i>交通事件:</h4></div>
+                        
+                      </div>
+                  </div>
+                </div>
+            </div><!-- Modal -->
+        </form>
+      </div><!-- container -->
+      <section>
+        <div class="rad-body-wrapper">
+          <div class="container-fluid">
+            <div id="map" class="rad-chart" ></div>
+            <div class="drop_left">
+              <a href="#0" class="panel-button button" data-toggle="tooltip" title="Hooray!"><span class="glyphicon glyphicon-arrow-left"></span></a>
+              <a href="#0" class="flow-button button" data-toggle="tooltip" title="Hooray!"><span class="glyphicon glyphicon-arrow-left"></span></a></div>
+
+
+            <!-- panel -->
+            <section class="panel">
+                  <!-- <section class="close-space"></section> -->
+                  <header>
+                    <h3>路線規劃</h3>
+                    <a href="#0" class="panel-close"><span class="glyphicon glyphicon-remove"></span></a>
+                  </header>
+                  
+                  <section class="panel-content">
+                    <button id="rechoose"  class="modalButton" onclick="showModal()"></span>重新選擇醫院 <span class="glyphicon glyphicon-tasks"></button>
+                    <div id="scroll"></div>
+
+                   
+
+                    
+                  </section>
+                  
+              </section> <!-- End of panel -->
+          
+
+
+            </div>
+          </div>
+      </section>
+    </main>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+     <script src = "js/public.js "></script>
+    <script type="text/javascript" async defer 
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByAK_p8gdIDklIJHgykl9ZSRMsRugpqsQ&callback=init&libraries=places"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+
+    <script src='bootstrap/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js'></script>
+
+    <script src="js/index.js"></script>
+   
+  </body>
+</html>
